@@ -1,7 +1,6 @@
 module.exports = {
     dialect: 'postgres',
     host: 'localhost',
-    port: 5432,
     username: 'postgres',
     password: 'docker',
     database: 'goapp',
@@ -10,4 +9,4 @@ module.exports = {
         underscored: true,
         underscoredAll: true,
     },
-};
+}
