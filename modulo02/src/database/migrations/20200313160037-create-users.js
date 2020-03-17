@@ -5,7 +5,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
-                primarayKey: true,
+                primaryKey: true,
             },
             name: {
                 type: Sequelize.STRING,
@@ -19,24 +19,24 @@ module.exports = {
             password_hash: {
                 type: Sequelize.STRING,
                 allowNull: false,
-
             },
             provider: {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false,
                 allowNull: false,
-
             },
             created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,
             },
+            updated_at: {
+                type: Sequelize.DATE,
+                allowNull: false,
+            },
         });
-
     },
 
-    down: (queryInterface, Sequelize) => {
+    down: queryInterface => {
         return queryInterface.dropTable('users');
-
-    }
+    },
 };
