@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
