@@ -21,10 +21,12 @@ class UserController {
 
         // Checar se ja existe usuario com mesmo email na tabela
 
-        const userExists = await User.findOne({ where: { email: req.body.email } });
+        const userExists = await User.findOne({
+            where: { email: req.body.email },
+        });
 
         if (userExists) {
-            return res.status(400).json({ err: 'Usuário já existente.' });
+            return res.status(400).json({ error: 'Usuário já existente.' });
         }
 
         // Criar usuário
@@ -78,7 +80,9 @@ class UserController {
         }
 
         if (oldPassword && !(await user.checkPassword(oldPassword))) {
-            return res.status(401).json({ error: 'A senha digitada não coincide com sua senha anterior' });
+            return res.status(401).json({
+                error: 'A senha digitada não coincide com sua senha anterior',
+            });
         }
         const { id, name, provider } = await user.update(req.body);
 
