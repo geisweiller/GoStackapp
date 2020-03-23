@@ -3,6 +3,7 @@ import { promisify } from 'util';
 
 import authConfig from '../../config/auth';
 
+// eslint-disable-next-line prettier/prettier
 export default async(req, res, next) => {
     const authHeader = req.headers.authorization;
 
