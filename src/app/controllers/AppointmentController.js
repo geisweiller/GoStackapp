@@ -1,11 +1,14 @@
 /* eslint-disable prettier/prettier */
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import User from '../models/User';
 import File from '../models/File';
 import Appointment from '../models/Appointments';
 import Notification from '../schemas/Notification';
+
+
+import Mail from '../../lib/Mail';
 
 
 
@@ -99,6 +102,44 @@ class AppointmentController {
         });
 
         return res.json(appointment);
+    }
+
+    async delete(req, res) {
+        const appointment = await Appointment.findByPk(req.params.id, {
+            include: [{
+                model: User,
+                as: 'provider',
+                attributes: ['name', 'email'],
+
+            }],
+        });
+
+        if (appointment.user_id !== req.userId) {
+            return res.status(401).json({
+                error: 'Você não tem permissão para cancelar esse agendamento.',
+            });
+        }
+
+        const dateWithSub = subHours(appointment.date, 2);
+
+        if (isBefore(dateWithSub, new Date())) {
+            return res.status(401).json({
+                error: "Você só pode cancelar agendamentos 2 horas antes do horário agendado.",
+            });
+        }
+
+        appointment.canceled_at = new Date();
+
+        await appointment.save(appointment);
+
+        await Mail.sendMail({
+            to: `${appointment.provider.name} <${appointment.provider.email}`,
+            subject: 'Agendamento cancelado',
+            text: 'Você tem um novo cancelamento',
+        });
+
+        return res.json(appointment);
+
     }
 }
 
