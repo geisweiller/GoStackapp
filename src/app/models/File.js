@@ -11,7 +11,7 @@ class File extends Model {
                 type: Sequelize.VIRTUAL,
                 get() {
                     // eslint-disable-next-line no-template-curly-in-string
-                    return `http://localhost:3333/files/${this.path}`;
+                    return `${process.env.APP_URL}/${this.path}`;
                 }
             }
         }, {
