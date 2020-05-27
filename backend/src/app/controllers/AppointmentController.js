@@ -93,7 +93,7 @@ class AppointmentController {
         const user = await User.findByPk(req.userId);
         const formattedDate = format(
             hourStart,
-            "'d' dd 'de' MMMM', às 'H:mm'h'", { locale: pt }
+            "dd 'de' MMMM', às 'H:mm'h'", { locale: pt }
         );
 
         await Notification.create({
