@@ -16,7 +16,7 @@ function Header() {
       <Content>
         <nav>
           <img src={logo} alt="Sereia Tattoo" width="70px" />
-          <Link to="/dashboard">DASHBOARD</Link>
+          <Link to="/dashboard">AGENDAMENTOS</Link>
         </nav>
 
         <aside>
@@ -31,7 +31,7 @@ function Header() {
                 profile.avatar.url ||
                 'https://api.adorable.io/avatars/50/abott@adorable.png'
               }
-              alt="avatar"
+              alt={profile.name}
             />
           </Profile>
         </aside>
