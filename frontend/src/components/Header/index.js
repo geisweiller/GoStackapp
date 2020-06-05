@@ -17,6 +17,7 @@ function Header() {
         <nav>
           <img src={logo} alt="Sereia Tattoo" width="70px" />
           <Link to="/dashboard">AGENDAMENTOS</Link>
+          <a href="https://www.instagram.com/sereia_tattoostudio/">PORTFOLIO</a>
         </nav>
 
         <aside>
